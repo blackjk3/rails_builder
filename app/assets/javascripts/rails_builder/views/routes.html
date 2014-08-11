@@ -1,0 +1,14 @@
+<h2><i class="fa fa-road"></i> Routes</h2>
+<div ng-repeat="route in routes | orderBy: 'route[0].controller'">
+  <div class="panel-heading bg-primary clearfix">
+    <h3 class="ng-binding"><i class="fa fa-cubes"></i> {{route[0].controller}}</h3>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item route-item" ng-repeat="r in route">
+      <span class="label label-success pull-left">{{r.controller}}#{{r.action}}</span>
+      <div class="route-path">{{ r.path }}</div>
+      <span class="badge badge-{{r.verb.toLowerCase()}}">{{ r.verb }}</span>
+      <span ng-if="r.name" class="badge">{{r.name}}_path</span>
+    </li>
+  </ul>
+</div>

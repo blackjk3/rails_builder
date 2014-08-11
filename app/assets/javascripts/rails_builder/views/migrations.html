@@ -1,0 +1,90 @@
+<h3>Migrations</h3>
+<div class="migration-stats clearfix row" style="margin:20px 0;">
+  <div class="panel col-md-2">
+    <div class="panel-left panel-item bg-reverse">
+      <p class="size-h1">{{ data.statistics.up }}</p>
+      <p class="text-muted">Ran Migrations</p>
+    </div>
+  </div>
+
+  <div class="panel col-md-2">
+    <div class="panel-left panel-item bg-reverse">
+      <p class="size-h1">{{ data.statistics.down }}</p>
+      <p class="text-muted">Pending Migrations</p>
+    </div>
+  </div>
+
+  <div class="panel col-md-4">
+    <div class="panel-left panel-item bg-reverse">
+      <p class="size-h2" style="margin: 14px 0;">{{ data.statistics.version }}</p>
+      <p class="text-muted">Current Version</p>
+    </div>
+  </div>
+</div>
+<div class="clearfix" style="margin-bottom: 20px;">
+  <div class="pull-left">
+    <button class="btn btn-primary" data-toggle="modal" ng-click="migrate();">Rake db:migrate</button>
+    <button class="btn btn-danger" data-toggle="modal" ng-click="rollback();">Rake db:rollback</button>
+  </div>
+
+  <div class="pull-right">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#migration-modal">Add Migration</button>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Migration ID</th>
+      <th>Migration Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="migration in data.migrations">
+      <td><span class="badge badge-{{migration[0].toLowerCase()}}">{{ migration[0] }}</span></td>
+      <td>{{ migration[1] }}</td>
+      <td>{{ migration[2] }}</td>
+      <td>
+        <button class="btn btn-info" ng-click="up(migration[1]);"><i class="fa fa-long-arrow-up"></i> Up</button>
+        <button class="btn btn-danger" ng-click="down(migration[1]);"><i class="fa fa-long-arrow-down"></i> Down</button>
+        <button class="btn btn-success" ng-click="reload(migration[1]);"><i class="fa fa-refresh"></i> Reload</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="migration-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Migration</h4>
+      </div>
+      <div class="modal-body">
+        <button ng-click="addRow()" class="btn btn-primary pull-right">Add Row</button>
+        <table class="table" id="column-table">
+          <thead>
+            <tr>
+              <th>Column Name</th>
+              <th>Column Type</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in rows track by $index">
+              <td><input type="text" id="column_name_{{$index}}" name="column_name_{{$index}}" class="column-name" /></td>
+              <td><select id="column_type_{{$index}}" name="column_type_{{$index}}" class="column-type" ng-model="row.value" ng-options="colType.name for colType in row.columnTypes"></select></td>
+              <td><button class="btn btn-danger" ng-click="removeRow(row)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="createMigration()">Create Migration</button>
+      </div>
+    </div>
+  </div>
+</div>

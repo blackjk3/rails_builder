@@ -1,0 +1,37 @@
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row">
+
+    <div class="col-md-4" ng-repeat="(key, stat) in stats.statistics">
+      <section class="panel">
+          <div class="panel-top bg-info">
+            <div class="text-left"><h3>{{key}}</h3></div>
+            <div class="divider divider-xl"></div>
+            <div class="divider divider-lg"></div>
+          </div>
+          <div class="panel-bottom bg-reverse clearfix" style="margin-left: 20px;">
+
+            <div class="pull-left panel-stat">
+              <h3>{{stat.lines}}</h3>
+              <p class="text-muted">Lines</p>
+            </div>
+
+            <div class="pull-left panel-stat">
+              <h3>{{stat.codelines}}</h3>
+              <p class="text-muted">LOC</p>
+            </div>
+
+            <div class="pull-left panel-stat">
+              <h3>{{stat.classes}}</h3>
+              <p class="text-muted">Classes</p>
+            </div>
+
+            <div class="pull-left panel-stat">
+              <h3>{{stat.methods}}</h3>
+              <p class="text-muted">Methods</p>
+            </div>
+
+          </div>
+      </section>
+    </div>
+  </div>
+</div>
