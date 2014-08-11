@@ -20,4 +20,5 @@ mount RailsBuilder::Engine => "/rails_builder"
 
 Screenshot
 ================
-![Alt text](/img/screenie.png?raw=true "Optional Title")
+![Migrations View](/img/screenie.png?raw=true "Migrations View")
+![Routes View](/img/screenie2.png?raw=true "Routes View")
